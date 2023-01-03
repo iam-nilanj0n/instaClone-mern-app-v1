@@ -1,2 +1,5 @@
 # instaClone-mern-app-v1
-Deploying in cyclic
+Deployed in cyclic,
+by Node JS static with React Build index.html,
+url- 'https://grumpy-lime-tick.cyclic.app/'
+
