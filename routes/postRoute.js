@@ -12,26 +12,9 @@ router.get('/PostView', async (req, res) => {
         const posts = await Post.find();
         // console.log(posts);
         let reversePost = [];
-        let dateArr = [], dates, postDate;
         for (let i = 0; i < posts.length; i++) {
-            dates = String(posts[posts.length - 1 - i].date).split(' ');
-            postDate = `${dates[2]} ${dates[1]} ${dates[3]}`;
-            dateArr.push(postDate)
             reversePost.push(posts[posts.length - 1 - i]);
         }
-        // console.log(dateArr);
-        // for(let i=0; i<reversePost.length; i++){
-        //     Object.keys(reversePost[i]).forEach((item) => {
-        //         console.log(String(item));
-        //     })
-        //     Object.values(reversePost[i]).forEach((item)=>{
-        //         console.log(item)
-        //     })
-        //     reversePost[i]['name'] = 'Nilanjan';
-        //     reversePost[i]['date'] = 'jana';
-        //     console.log(reversePost[i]['date'] );
-        // }
-        // console.log(reversePost);
         if (posts) {
             res.status(200).send(reversePost)
         }
@@ -55,11 +38,15 @@ router.post('/upload', async (req, res) => {
             });
 
             if (uploadRes) {
+                let d = new Date();
+                let time = d.toString().slice(0,25);
+
                 const post = new Post({
                     name,
                     location,
                     description,
-                    PostImage: uploadRes
+                    PostImage: uploadRes,
+                    date: time
                 })
 
                 const savedPost = await post.save();
